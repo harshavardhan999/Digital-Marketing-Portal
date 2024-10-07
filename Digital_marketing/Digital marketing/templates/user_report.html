@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    {% include 'cdnlines.html' %}
+    <style>
+        form {
+            margin-top: 20%;
+        }
+        
+        .container {
+            margin-top: 2%;
+        }
+    </style>
+</head>
+
+<body>
+    <h5 style="background-color: black;padding: 10px;">
+        <a href="/homepage/" style="margin-left: 10px;color: white;padding: 20px;">Back</a>
+        <a href="/login/" style="margin-left: 990px;color: white;">Logout</a>
+    </h5>
+
+    <div class="container">
+        <div class="row">
+            <div class="offset-md-3 col-md-6">
+              
+                <form method="POST" class="shadow-lg mt-5 px-5 py-5">
+
+                    {% csrf_token %}
+                    <h2 class="text-center">Report</h2><br>
+                    <!--<label >Client Name</label>&nbsp;-->
+                    <select name="clientname" id="department">       
+                        <option value="0">--Select Client</option>     
+                        {% for item in people  %}
+                        <option value="{{ item.id }}">{{ item.clientname }}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="hidden" name="hiddenclient" id="hidden_input">
+                    
+                    <select name="campaign_name" id="Employee">
+                        <option value="0">--Select campaign</option>  
+                        {% for item in empcontext  %}
+                        <option name="one" value="{{ item.deptid_id }}">{{ item.campaign_name }}</option>
+                        {% endfor %}
+                    </select><br><br>
+                    <input type="hidden" name="hiddencampaign" id="hidden_input_two">
+                    <label>Date</label>
+                    <input type="date" name="date" id="dateFieldId" required class="form-control">
+                    <label>NO OF IMPRESSIONS</label>
+                    <input type="number" name="no_of_impressions" class="form-control" min="0" step="0.01" id="input1a" oninput="multiply()">
+                    <label>NO OF CLICKS:</label>
+                    <input type="number" name="no_of_clicks" class="form-control" id="input2a" step="0.01" oninput="multiply2()">
+                    <label>COST PER IMPRESSIONS</label>
+                    <input type="number" name="cost_per_impressions" class="form-control" step="0.01" min="0" id="input1b">
+                    <label>COST PER CLICKS</label>
+                    <input type="number" name="cost_per_click" class="form-control" min="0" step="0.01" id="input2b">
+
+                    <label>TOTAL COST PER IMPRESSIONS</label>
+                    <input type="number" name="total_cost_per_impressions" class="form-control" step="0.01" min="0" id="result1" readonly>
+                    <label>TOTAL COST PER CLICKS</label>
+                    <input type="number" name="total_cost_per_click" class="form-control" min="0" step="0.01" id="result2" readonly>
+                    <label> COST PER DAY</label>
+                    <input type="number" name="cost_per_day" class="form-control" min="0" id="result3" step="0.01" readonly>
+
+                    <center class="mt-3">
+                        <b> <input type="submit" value="Submit" class="btn bg-success text-white"></b>
+                        <b><input type="reset" value="Clear" class="btn bg-danger text-white ml-3"></b>
+                    </center>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+const dependentDropdownTwo = document.querySelector('#Employee');
+    const hiddenInputTwo = document.querySelector('#hidden_input_two');
+    const campaignDefaultValue = "--Select campaign"; // Default campaign value to be selected
+        
+    dependentDropdownTwo.addEventListener('change', (event) => {
+        const selectedOptionTwo = event.target.selectedOptions[0];
+        const selectedTextTwo = selectedOptionTwo.textContent;
+        hiddenInputTwo.value = selectedTextTwo;
+    });
+        
+    const dependentDropdown = document.querySelector('#department');
+    const hiddenInput = document.querySelector('#hidden_input');
+    const employeeDropdown = document.querySelector('#Employee');
+        
+    dependentDropdown.addEventListener('change', (event) => {
+        const selectedOption = event.target.selectedOptions[0];
+        const selectedText = selectedOption.textContent;
+        hiddenInput.value = selectedText;
+        
+        // Set default value for the employee dropdown
+        const defaultOption = document.createElement("option");
+        defaultOption.value = "";
+        defaultOption.text = campaignDefaultValue;
+        employeeDropdown.innerHTML = "";
+        employeeDropdown.add(defaultOption);
+        $options.filter('[value="' + selectedOption.value + '"]').each(function() {
+            employeeDropdown.add($(this).clone()[0]);
+        });
+        employeeDropdown.value = defaultOption.value;
+    });
+
+    $(document).ready(function() {
+        var department = $("#department");
+        var employee = $("#Employee");
+        var $options = employee.find('option');
+        
+        department.on('change', function() {
+            var selectedOption = $options.filter('[value="' + this.value + '"]');
+            var selectedText = selectedOption.text();
+            employee.html(selectedOption);
+            
+            // Set default value for the employee dropdown
+            const defaultOption = document.createElement("option");
+            defaultOption.value = "";
+            defaultOption.text = campaignDefaultValue;
+            employeeDropdown.innerHTML = "";
+            employeeDropdown.add(defaultOption);
+            $options.filter('[value="' + selectedOption.val() + '"]').each(function() {
+                employeeDropdown.add($(this).clone()[0]);
+            });
+            employeeDropdown.value = defaultOption.value;
+        }).trigger('change');
+    });
+        
+
+    
+        function updateResult() {
+            var value1 = document.getElementById("input1a").value;
+            var value2 = document.getElementById("input1b").value;
+            var value3 = document.getElementById("input2a").value;
+            var value4 = document.getElementById("input2b").value;
+            var result1 = value1 * value2;
+            var result2 = value3 * value4;
+            var result3 = result1 + result2;
+            document.getElementById("result1").value = result1;
+            document.getElementById("result2").value = result2;
+            document.getElementById("result3").value = result3;
+        }
+
+        // Listen for changes to the input fields and update the result automatically
+        document.addEventListener("input", updateResult);
+
+        var currentDate = new Date();
+        var dateField = document.getElementById("dateFieldId");
+        var year = currentDate.getFullYear();
+        var month = currentDate.getMonth() + 1;
+        var day = currentDate.getDate();
+        var maxDate = year + "-" + month.toString().padStart(2, "0") + "-" + day.toString().padStart(2, "0");
+
+        dateField.setAttribute("max", maxDate);
+
+    </script>
+
+    <!--script for success pop up when client form is submitted-->
+
+    {% for message in messages %}
+    {% if message.tags == 'success' %}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        m='{{message}}';
+        swal("success",m,"success")
+    </script>
+    {% endif %}
+    {% endfor %}
+
+    <!--script for deinied pop up when same date is registered-->
+    {% for message in messages %}
+    {% if message.tags == 'error' %}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        m='{{message}}';
+        swal("denied!",m,"error")
+    </script>
+    {% endif %}
+    {% endfor %}
+
+
+    
+</body>
+
+</html>

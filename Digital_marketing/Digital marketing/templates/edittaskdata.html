@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% include 'cdnlines.html' %}
+    
+<style>
+    body{
+        background-color:aliceblue;
+    }
+    /* form{
+        background-color:rgb(155, 187, 213);
+    } */
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="offset-md-3 col-md-6">
+                <form method="POST" class="post-form" action="/update/{{td.id}}" id="det" name="form1" onsubmit="required()" class="shadow-lg px-4 py-4 mt-5" style="font-size: 18px; ">
+                <input type="hidden" name="id" id="id" maxlength="20" value="{{td.id}}">
+                    {% csrf_token %}    
+                    <h2 class="text-center">Client Requirements</h2>
+                     
+                    
+        
+                <label>Campaign Name : </label>
+                <input type="text"  required class="form-control" name="campaign_name" value="{{td.campaign_name}}">
+                <label>Start Date</label>
+                <input type="date"  required id="dat" class="form-control" name="start_date" value="{{td.start_date}}">
+                <label>End Date</label>
+                <input type="date" id="dat" required class="form-control" name="end_date" value="{{td.end_date}}">
+                <label>Planned Impressions : </label>
+                <input type="number" min="1" class="form-control" name="planned_impressions" value="{{td.planned_impressions}}">
+                <label>Planned CPM : </label>
+                <input type="number" min="1" class="form-control" name="planned_cpm" value="{{td.planned_cpm}}">
+                <label>Planned CPC : </label>
+                <input type="number" min="1" class="form-control" name="planned_cpc" value="{{td.planned_cpc}}">
+                <label>Planned Cost : </label>
+                <input type="number" min="1" class="form-control" name="planned_cost" value="{{td.planned_cost}}">
+
+                <label>Client Id: </label>
+                <input type="number" min="0" class="form-control" name="deptid_id" value="{{td.deptid_id}}">
+                <center class="mt-3">
+                <input onclick="Sub()" id="sub" type="submit" value="SUBMIT" class="btn bg-success text-white">
+                
+                </center>
+               
+                </form>
+            </div>
+        </div> 
+    </div>
+        
+    </div>
+    </body>
+    <script>
+        function required()
+{
+var empt = document.forms["form1"].value;
+if (empt == "")
+{
+alert('Submitted Succesfully');
+return true; 
+}
+}
+    </script>
+</body>
+</html>

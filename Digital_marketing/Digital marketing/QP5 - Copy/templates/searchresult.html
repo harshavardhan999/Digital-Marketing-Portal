@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+
+    <style>
+        /*
+        body {
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_eAnefBIt9sPaOu09tn3-saKLK-DGIBK4iw&usqp=CAU');
+            background-size: cover;
+            background-repeat: no-repeat;
+        }*/
+    </style>
+    {% include 'cdnlines.html' %}
+
+</head>
+
+<body style="background-color: Cornsilk;">
+    <h5 style="background-color: black;padding: 10px;">
+        <a href="/reportdata/" style="margin-left: 10px;color: white;padding: 20px;">Back</a>
+        <a href="/login/" style="margin-left: 990px;color: white;">Logout</a>
+        </h5>
+    
+
+    <center>
+        <center><h2>Report Details</h2></center><br>
+        <form method="POST">
+            <form method="POST" class="mt-4 mb-3">
+                {% csrf_token %}
+                <label>FROM</label>
+                <input type="date" name="datef" required/>
+                <label>To</label>
+                <input type="date" name="datet" required/>
+                <button type="submit" class="btn btn-warning btn-sm">Search</button>
+
+    </center>
+    <table class="table table-bordered" id="example" class="display">
+        <thead class="bg-primary" id="W">
+            <tr>
+                <th>name</th>
+                <th>date</th>
+                <th>no_of_impressions</th>
+                <th>no_of_clicks</th>
+                <th>cost_per_impressions</th>
+                <th>cost_per_click</th>
+                <th>total_cost_per_impressions</th>
+                <th>total_cost_per_click</th>
+                <th>cost_per_day</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if queryset %} {% for i in queryset %}
+            <tr>
+                <td>{{i.clientname}}</td>
+                <td>{{i.date}}</td>
+                <td>{{i.no_of_impressions}}</td>
+                <td>{{i.no_of_clicks}}</td>
+                <td>{{i.cost_per_click}}</td>
+                <td>{{i.cost_per_impressions}}</td>
+                <td>{{i.total_cost_per_impressions}}</td>
+                <td>{{i.total_cost_per_click}}</td>
+                <td>{{i.cost_per_day}}</td>
+                <td>
+                    <a href="" class="btn bg-warning text-white">Edit</a>
+                    <a href="" class="btn bg-danger text-white">Delete</a>
+                </td>
+            </tr>
+            {% endfor %} {% endif %}
+        </tbody>
+    </table>
+    </form>
+    <script src="https://ajax.googleapis/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/Javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/Javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    
+    <title>repot data</title>
+    <style>
+        #img2{
+          margin-left: 60%;
+        }
+      </style>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <hr>
+      <img src="https://www.brightcomgroup.com/wp-content/uploads/2021/02/logo.png" width="300px" height="80px">
+      <img src="data:image/png;base64,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" id="img2" width="120px" height="100px">
+  <hr>
+          </div>
+        </div>
+      </div>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"> {% include 'cdnlines.html' %}
+</head>
+
+<body>
+
+    </form>
+
+
+    <form method="POST">
+        {% csrf_token %}
+        <center>
+            <label>FROM</label>
+            <input type="date" name="datef" required/>
+            <label>To</label>
+            <input type="date" name="datet" required/>
+            <button type="submit" class="btn btn-warning btn-sm">Search</button>
+        </center>
+        <div class="container-fluid">
+            <div>
+                <!---
+      <div >
+        <hr>
+        <label>From:</label>
+        <input type="date" name="fromdate">
+        <label >To:</label>
+        <input type="date" name="todate">
+        <input type="submit" value="search">
+        </hr>
+      </div>
+    -->
+            </div>
+            <table id="example" class="display">
+                <thead class="bg-info" id="W">
+                    <tr>
+                        <th class="text-center">Client Name</th>
+                        <th class="text-center">Campaign Name</th>
+                        <th class="text-center">Date</th>
+                        <th class="text-center">NO OF IMPRESSIONS</th>
+                        <th class="text-center">NO OF CLICKS</th>
+                        <th class="text-center">COST PER IMPRESSIONS</th>
+                        <th class="text-center">COST PER CLICK</th>
+                        <th class="text-center">TOTAL COST PER IMPRESSIONS</th>
+                        <th class="text-center">TOTAL COST PER CLICKS</th>
+                        <th class="text-center">TOTAL COST PER Day</th>
+
+
+                    </tr>
+                </thead>
+                <tbody id="W">
+                    {% if customer %} {% for i in customer %}
+
+
+                    <tr style="font-size: 15px;">
+                        <td>{{i.clientname}}</td>
+                        <td>{{i.campaign_name}}</td>
+                        <td style="width: 10%;">{{i.date}}</td>
+                        <td>{{i.no_of_impressions}}</td>
+                        <td>{{i.no_of_clicks}}</td>
+                        <td>{{i.cost_per_impressions}}</td>
+                        <td>{{i.cost_per_click}}</td>
+                        <td>{{i.total_cost_per_impressions}}</td>
+                        <td>{{i.total_cost_per_click}}</td>
+                        <td>{{i.cost_per_day}}</td>
+
+
+
+                    </tr>
+                    {% endfor %} {% endif %}
+
+
+                </tbody>
+            </table>
+    </form>
+    <script src="https://ajax.googleapis/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/Javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/Javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
+    </script>
+
+
+<input type="button" name="piechart" value="Pie Chart" onclick="myFunction()">
+<input type="button" name="bargraph" value="Bar Graph" onclick="myFunction1()">
+<!-- 
+<div id="myDIV">
+    <div id="myChart" style="width:100%; max-width:600px; height:500px;">
+    </div>
+
+<script>
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+function drawChart() {
+const data = google.visualization.arrayToDataTable([
+['Activity', 'clicks'],
+
+['Number-of-clicks',500],
+['Number-of-Impressions',1000]
+]);
+
+const options = {
+title:'Pictorial Representation Of Project'
+};
+
+const chart = new google.visualization.PieChart(document.getElementById('myChart'));
+chart.draw(data, options);  
+}
+</script>
+
+</div>
+
+<script>
+    function myFunction() {
+      var x = document.getElementById("myDIV");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    }
+    </script>
+
+    <div id="myDIV1">
+        <div
+        id="myChart1" style="width:100%; max-width:600px; height:500px;">
+        </div>
+        
+        <script>
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        
+        function drawChart() {
+        const data = google.visualization.arrayToDataTable([
+          ['Activity', 'clicks'],
+         
+          ['Number-of-clicks',500],
+          ['Number-of-Impressions',1000]
+        ]);
+        
+        const options = {
+          title:'Pictorial Representation Of Project'
+        };
+        
+        const chart = new google.visualization.BarChart(document.getElementById('myChart1'));
+          chart.draw(data, options);
+        }
+        </script>
+        
+    </div>
+
+    <script>
+        function myFunction1() {
+          var x = document.getElementById("myDIV1");
+          if (x.style.display === "none") {
+            x.style.display = "block";
+          } else {
+            x.style.display = "none";
+          }
+        }
+        </script> -->
+
+
+
+
+   
+</body>
+
+</html>

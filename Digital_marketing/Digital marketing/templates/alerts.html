@@ -1,0 +1,10 @@
+<!-- alerts for error messages -->
+<div class="messages">
+    {% if messages %}
+        {% for message in messages %}
+            <div class= "text-center alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>

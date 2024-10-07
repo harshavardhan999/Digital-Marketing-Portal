@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>repot data</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    </head>
+    {% include 'superadmin_default.html' %}
+     {% block content %}
+    
+<body>
+    
+      
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+    <center><h2>Client Details</h2></center>
+  
+  <div class="container-fluid">
+    
+    <table  id="example" class="display">
+          <thead class="bg-primary" id="W">
+            <tr >
+              <th class="text-center" >Client Name</th>
+              
+              <th class="text-center" >User ID</th>
+              <th class="text-center" >Password</th>
+              <th class="text-center" >Date Of Join</th>
+              <th class="text-center" >Company Logo</th>
+              <th class="text-center">Action</th>
+
+            </tr>
+          </thead>
+          <tbody id="W">
+             
+          {% if people %}
+          {% for i in people %}
+              
+              
+            <tr>
+              <td>{{i.clientname}}</td>
+              
+              <td>{{i.userid}}</td>
+              <td>{{i.password}}</td>
+              <td >{{i.date}}</td>
+             <td ><img src="{{i.image.url}}" style="width: 40px;height: 40px;"></td>
+            <td>
+              <a href="/edit_client1/{{i.id}}"><span class="btn btn-success">Edit </span></a>
+              <!---
+                <a href="/edit_client/{{i.id}}"><span class="btn btn-success">Edit old</span></a>
+              -->
+                <a href="/delete_client/{{i.id}}" class="btn btn-danger" onclick="return confirm('are you sure you want to delete ?')">Delete</a> 
+            </td>
+            </tr>
+            
+            {% endfor %}
+            {% endif %}
+            </tbody>
+        </table>
+
+        
+        </div>
+      </form>
+
+        <script src="https://ajax.googleapis/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/Javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script type="text/Javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+        <script>
+          $(document).ready(function () {
+            $('#example').DataTable();
+        });
+        
+      </script>
+            
+      
+      
+    {% endblock %}
+</body>
+</html>

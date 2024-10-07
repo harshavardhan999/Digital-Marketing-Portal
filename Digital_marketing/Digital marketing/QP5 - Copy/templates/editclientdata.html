@@ -1,0 +1,103 @@
+
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>client form</title>
+    <style>
+        .bg{
+    background-size: cover;
+}.form{
+    width: 350px;
+    height: 505px;
+    background: linear-gradient(to top, rgba(0,0,0,0.8)50%,rgba(0,0,0,0.8)50%);
+    position: absolute;
+    top: px;
+    left: 500px;
+    
+    border-radius: 10px;
+    padding: 25px;
+}
+.form h2{
+    width: 250px;
+    font-family: sans-serif;
+    text-align: center;
+    color:orange;
+    font-size: 22px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin: 2px;
+    padding: 1px;
+    
+   
+}
+.form input{
+    width: 240px;
+    height: 25px;
+    background: transparent;
+    border-bottom: 1px solid orange;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    color: #fff;
+    font-size: 15px;
+    letter-spacing: 1px;
+    margin-top: 30px;
+    font-family: sans-serif;
+}
+.form input:focus{
+    outline: none;
+}
+::placeholder{
+    color: #fff;
+    font-family: Arial;
+}
+.btnn{
+    width: 240px;
+    height: 40px;
+    background: #ff7200;
+    border: none;
+    margin-top: 30px;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: black;
+    transition: 0.4s ease;
+}
+.btnn:hover{
+    background: #fff;
+    color: #ff7200;
+}
+.btnn a{
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+    </style>
+    
+</head>
+<body  style="background-repeat: no-repeat; background-size: cover;">   
+    {% include 'SAdmin_Homepage.html' %}
+    {% block content%}
+    <div class="form">
+        <form method="POST" action="/update_client/{{people.id}}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2>CLIENT INFORMATION</h2>
+         <input type="text" name="clientname" placeholder="Name" value="{{people.clientname}}">
+         
+         <input type="text" name="userid" placeholder="User-Id" value="{{people.userid}}">
+         <input type="password" name="password" placeholder="Password" value="{{people.password}}">
+         <input type="date" name="date" placeholder="Date Of Join" value="{{people.date}}">
+         <input type="file" name="image" placeholder="Company Logo" value="{{people.image}}">
+         <input type="submit" value="submit">
+        </form>
+    </div>
+
+    {% endblock %}
+    </body>
+</html>

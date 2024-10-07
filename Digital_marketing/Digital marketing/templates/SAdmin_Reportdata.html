@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>repot data</title>
+    
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    </head>
+    {% include 'superadmin_default.html' %}
+     {% block content %}
+     
+    <body>
+     
+    <!-- <h5 style="background-color: black;padding: 10px;"> 
+      <a href="/homepage/" style="margin-left: 10px;color: white;padding: 20px;">Back</a>
+      <a href="/login/" style="margin-left: 990px;color: white;">Logout</a>
+      </h5>
+   -->
+      
+    <form method="POST">
+      {% csrf_token %}
+      <center><h2>Report Details</h2></center><br>
+    <center>
+    <label>FROM</label>
+            <input type="date" name="datef" id="start-date" required/>
+            <label>To</label>
+            <input type="date" name="datet" id="end-date" required/>
+            <button type="submit" class="btn btn-warning btn-sm">Search</button>
+          </center>
+  <div class="container-fluid">
+    <div >
+      <!---
+      <div >
+        <hr>
+        <label>From:</label>
+        <input type="date" name="fromdate">
+        <label >To:</label>
+        <input type="date" name="todate">
+        <input type="submit" value="search">
+        </hr>
+      </div>
+    -->
+    </div>
+  <table  id="example" class="display">
+          <thead class="bg-primary" id="W">
+            <tr >
+              <th class="text-center"  >Client Name</th>
+              <th class="text-center"  >Campaign Name</th>
+              <th class="text-center"  >Date</th>
+              <th class="text-center"  >NO OF IMPRESSIONS</th>
+              <th class="text-center" >NO OF CLICKS</th>
+              <th class="text-center" >COST PER IMPRESSIONS</th>
+              <th class="text-center" >COST PER CLICK</th>
+              <th class="text-center" >TOTAL COST PER IMPRESSIONS</th>
+              <th class="text-center" >TOTAL COST PER CLICKS</th>
+              <th class="text-center" >TOTAL COST PER Day</th>
+              
+              <th class="text-center">Action</th>
+
+            </tr>
+          </thead>
+          <tbody id="W">
+              {% if rd %}
+              {% for i in rd %}
+              
+              
+            <tr style="font-size: 15px;">
+              <td>{{i.clientname}}</td>
+              <td>{{i.campaign_name}}</td>
+              <td style="width: 10%;">{{i.date}}</td>
+              <td>{{i.no_of_impressions}}</td>
+              <td>{{i.no_of_clicks}}</td>
+              <td>{{i.cost_per_impressions}}</td>
+              <td>{{i.cost_per_click}}</td>
+              <td>{{i.total_cost_per_impressions}}</td>
+              <td>{{i.total_cost_per_click}}</td>
+              <td>{{i.cost_per_day}}</td>
+              
+              <td style="width: 15%;">
+                <a href="/edit_report/{{i.id}}"><span class="btn btn-success">Edit</span></a>
+                <a href="/delete_report/{{i.id}}" class="btn btn-danger ml-3" onclick="return confirm('are you sure you want to delete ?')">Delete</a> 
+              </td>
+              
+            </tr>
+            {% endfor %}
+            {% endif %}
+              
+            
+          </tbody>
+        </table>
+      </form>
+  <script src="https://ajax.googleapis/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/Javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script type="text/Javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+  <script>
+     const startDateInput = document.getElementById("start-date");
+        const endDateInput = document.getElementById("end-date");
+
+startDateInput.addEventListener("change", () => {
+  const startDateValue = startDateInput.value;
+  endDateInput.min = startDateValue;
+});
+  var today = new Date().toISOString().split('T')[0];
+  document.getElementById("end-date").setAttribute("max", today);
+
+
+    $(document).ready(function () {
+      $('#example').DataTable();
+  });
+  
+</script>
+      
+      
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task data</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+</head>
+
+{% include 'superadmin_default.html' %}
+{% block content %}
+    
+<body>
+    
+      
+    <form>
+      {% csrf_token %}
+    <center><h2>Task Details</h2></center>
+    
+    
+    <div class="container-fluid">
+      <div >
+        <table id="example" class="display">
+          <thead class="bg-primary" id="W">
+            <tr >
+              <th class="text-center"  >Client Name</th>
+              <th class="text-center"  >Campaign Name</th>
+              <th class="text-center" >Start Date</th>
+              <th class="text-center" >End Date</th>
+              <th class="text-center" >Planned Impressions</th>
+              <th class="text-center" >Planned CPM</th>
+              <th class="text-center" >Planned CPC</th>
+              <th class="text-center" >Planned Cost</th>
+              
+              <th class="text-center">Action</th>
+
+            </tr>
+          </thead>
+          <tbody id="W">
+              {% if td %}
+              {% for i in td %}
+              
+              
+            <tr>
+              <td>{{i.name}}</td>
+              <td>{{i.campaign_name}}</td>
+              <td>{{i.start_date}}</td>
+              <td>{{i.end_date}}</td>
+              <td>{{i.planned_impressions}}</td>
+              <td>{{i.planned_cpm}}</td>
+              <td>{{i.planned_cpc}}</td>
+              <td>{{i.planned_cost}}</td>
+              <td>
+                <a href="/edit/{{i.id}}"><span class="btn btn-success" >Edit</span></a>
+                <a href="/delete/{{i.id}}" class="btn btn-danger" onclick="return confirm('are you sure you want to delete ?')">Delete</a> 
+              </td>
+              
+            </tr>
+            {% endfor %}
+            {% endif %}
+              
+            
+          </tbody>
+        </table>
+
+      </form> 
+      <script src="https://ajax.googleapis/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/Javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script type="text/Javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#example').DataTable();
+  });
+  
+</script>
+   
+      </div>
+    </div>
+
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>repot data</title>
+    {% include 'cdnlines.html' %}
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+</head>
+
+<body>
+    {% block content %}
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %} {% if people %} {% for i in people %}
+
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+             
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <img src="data:image/jpeg;base64,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"
+                        width="200px" height="180px">
+                    <img src="{{i.image.url}}" width="180px" height="130px" style="margin-left: 1300px;">
+                </div>
+            </div>
+        </nav>
+
+
+
+
+
+        {% endfor %} {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            <center>
+                <label>FROM</label>
+                <input type="date" name="datef" required/>
+                <label>To</label>
+                <input type="date" name="datet" required/>
+                <button type="submit" class="btn btn-warning btn-sm">Search</button>
+            </center>
+            <div class="container-fluid">
+                <div>
+                    <!---
+      <div >
+        <hr>
+        <label>From:</label>
+        <input type="date" name="fromdate">
+        <label >To:</label>
+        <input type="date" name="todate">
+        <input type="submit" value="search">
+        </hr>
+      </div>
+    -->
+                </div>
+                <table id="example" class="display">
+                    <thead class="bg-info" id="W">
+                        <tr>
+                            <th class="text-center">Client Name</th>
+                            <th class="text-center">Campaign Name</th>
+                            <th class="text-center">Date</th>
+                            <th class="text-center">NO OF IMPRESSIONS</th>
+                            <th class="text-center">NO OF CLICKS</th>
+                            <th class="text-center">COST PER IMPRESSIONS</th>
+                            <th class="text-center">COST PER CLICK</th>
+                            <th class="text-center">TOTAL COST PER IMPRESSIONS</th>
+                            <th class="text-center">TOTAL COST PER CLICKS</th>
+                            <th class="text-center">TOTAL COST PER Day</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody id="W">
+                        {% if q %} {% for i in q %}
+
+
+                        <tr style="font-size: 15px;">
+                            <td>{{i.clientname}}</td>
+                            <td>{{i.campaign_name}}</td>
+                            <td style="width: 10%;">{{i.date}}</td>
+                            <td>{{i.no_of_impressions}}</td>
+                            <td>{{i.no_of_clicks}}</td>
+                            <td>{{i.cost_per_impressions}}</td>
+                            <td>{{i.cost_per_click}}</td>
+                            <td>{{i.total_cost_per_impressions}}</td>
+                            <td>{{i.total_cost_per_click}}</td>
+                            <td>{{i.cost_per_day}}</td>
+
+
+
+                        </tr>
+                        {% endfor %} {% endif %}
+
+
+                    </tbody>
+                </table>
+        </form>
+        <script src="https://ajax.googleapis/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/Javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script type="text/Javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('#example').DataTable();
+            });
+        </script>
+
+
+        {% endblock %}
+</body>
+
+</html>
